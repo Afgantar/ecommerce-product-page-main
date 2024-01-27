@@ -19,7 +19,7 @@ export class GlobalServiceService {
     this.images = [];
     this.thumbnails = [];
     this.openLightBox = false;
-    this.openNavbar = true;
+    this.openNavbar = false;
   }
 
   addItem(item: AddedItems): void {
