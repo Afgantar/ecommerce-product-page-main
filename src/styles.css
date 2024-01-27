@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: hsl(220, 14%, 75%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(219, 9%, 45%);
+  border-radius: 5px;
+}

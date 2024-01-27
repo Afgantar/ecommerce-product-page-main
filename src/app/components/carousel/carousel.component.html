@@ -1,0 +1,83 @@
+<section
+  class="w-full flex flex-col justify-center items-center mobile:w-[400px] gap-[40px]"
+>
+  <figure
+    tabindex="0"
+    (keydown)="handleKeyDown($event)"
+    [ngStyle]="
+      windowWidth < 451 ? { width: windowWidth.toString() } : { width: '100%' }
+    "
+    class="flex items-center mobile:rounded-[20px] overflow-hidden cursor-pointer relative"
+    (click)="imageClick()"
+  >
+    <button
+      (click)="previous()"
+      class="bg-white absolute w-[40px] aspect-square rounded-full left-[10px] top-[50%] translate-y-[-50%] z-[50] group active:scale-90 flex justify-center items-center mobile:hidden"
+    >
+      <svg
+        width="12"
+        height="18"
+        xmlns="http://www.w3.org/2000/svg"
+        class="-translate-x-[3px]"
+      >
+        <path
+          d="M11 1 3 9l8 8"
+          stroke="#1D2026"
+          stroke-width="3"
+          fill-rule="evenodd"
+          class="stroke-[#69707D] group-hover:stroke-primary-orange transition-colors ease-in-out duration-300 fill-white"
+        />
+      </svg>
+    </button>
+    <button
+      (click)="next()"
+      class="bg-white absolute w-[40px] aspect-square rounded-full right-[10px] top-[50%] translate-y-[-50%] z-[50] group active:scale-90 flex justify-center items-center mobile:hidden"
+    >
+      <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m2 1 8 8-8 8"
+          stroke="#1D2026"
+          stroke-width="3"
+          fill-rule="evenodd"
+          class="stroke-[#69707D] group-hover:stroke-primary-orange transition-colors ease-in-out duration-300 fill-white"
+        />
+      </svg>
+    </button>
+    @for (image of images; track image.name) {
+    <img
+      [src]="image.image"
+      [alt]="image.name"
+      class="aspect-square transition-transform ease-in-out duration-1000 motion-reduce:transition-none"
+      [ngStyle]="
+        windowWidth < 451
+          ? {
+              transform:
+                'translateX(' + (-index * clientWidth).toString() + 'px)',
+              width: windowWidth.toString()
+            }
+          : {
+              transform: 'translateX(' + (-index * 400).toString() + 'px)',
+              width: '100%'
+            }
+      "
+    />
+    }
+  </figure>
+  <section class="w-full hidden mobile:flex items-center gap-[25px]">
+    @for (thumbnail of thumbnails; track thumbnail.name) {
+    <button
+      class="overflow-hidden rounded-[10px] border-[2px] box-border relative group"
+      (click)="thumbnailClick(thumbnail.id)"
+      [ngClass]="
+        index === thumbnail.id ? 'border-primary-orange' : 'border-transparent'
+      "
+    >
+      <div
+        class="absolute top-0 bottom-0 left-0 right-0 bg-white/50 group-hover:opacity-100 transition-opacity ease-in-out duration-300"
+        [ngClass]="index === thumbnail.id ? 'opacity-100' : 'opacity-0'"
+      ></div>
+      <img [src]="thumbnail.image" [alt]="thumbnail.name" />
+    </button>
+    }
+  </section>
+</section>

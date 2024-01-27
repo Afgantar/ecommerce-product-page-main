@@ -1,0 +1,76 @@
+<section
+  class="w-full max-w-[450px] flex flex-col justify-center items-center gap-[30px]"
+>
+  <button
+    (click)="closeLightBox()"
+    class="text-white self-end group active:scale-90"
+  >
+    <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+        fill-rule="evenodd"
+        class="fill-[#69707D] group-hover:fill-primary-orange transition-colors ease-in-out duration-300"
+      />
+    </svg>
+  </button>
+  <figure [@imageTransition]="index" class="w-[450px] aspect-square relative">
+    <button
+      (click)="previous()"
+      class="bg-white absolute w-[40px] aspect-square rounded-full left-0 top-[50%] translate-y-[-50%] translate-x-[-50%] z-[50] group active:scale-90 flex justify-center items-center"
+    >
+      <svg
+        width="12"
+        height="18"
+        xmlns="http://www.w3.org/2000/svg"
+        class="-translate-x-[3px]"
+      >
+        <path
+          d="M11 1 3 9l8 8"
+          stroke="#1D2026"
+          stroke-width="3"
+          fill-rule="evenodd"
+          class="stroke-[#69707D] group-hover:stroke-primary-orange transition-colors ease-in-out duration-300 fill-white"
+        />
+      </svg>
+    </button>
+    <button
+      (click)="next()"
+      class="bg-white absolute w-[40px] aspect-square rounded-full right-0 top-[50%] translate-y-[-50%] translate-x-[50%] z-[50] group active:scale-90 flex justify-center items-center"
+    >
+      <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m2 1 8 8-8 8"
+          stroke="#1D2026"
+          stroke-width="3"
+          fill-rule="evenodd"
+          class="stroke-[#69707D] group-hover:stroke-primary-orange transition-colors ease-in-out duration-300 fill-white"
+        />
+      </svg>
+    </button>
+    @for (image of globalService.images; track image.name) { @if (image.name ===
+    globalService.images[index].name) {
+    <img
+      [src]="image.image"
+      [alt]="image.name"
+      class="absolute rounded-[30px]"
+    />
+    } }
+  </figure>
+  <section class="w-[90%] flex items-center gap-[25px]">
+    @for (thumbnail of globalService.thumbnails; track thumbnail.name) {
+    <button
+      (click)="thumbnailClick(thumbnail.id)"
+      class="overflow-hidden rounded-[10px] border-[2px] box-border relative group"
+      [ngClass]="
+        index === thumbnail.id ? 'border-primary-orange' : 'border-transparent'
+      "
+    >
+      <div
+        class="absolute top-0 bottom-0 left-0 right-0 bg-white/50 group-hover:opacity-100 transition-opacity ease-in-out duration-300"
+        [ngClass]="index === thumbnail.id ? 'opacity-100' : 'opacity-0'"
+      ></div>
+      <img [src]="thumbnail.image" [alt]="thumbnail.name" />
+    </button>
+    }
+  </section>
+</section>

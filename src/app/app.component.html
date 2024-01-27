@@ -1,0 +1,28 @@
+<main class="w-full min-h-screen">
+  @if (globalService.openCart) {
+  <app-cart
+    @cartAnimation
+    class="fixed z-[100] left-[10px] mobile:left-auto right-[10px] mobile:right-[50px] top-[100px] shadow-xl rounded-[15px] overflow-hidden"
+  ></app-cart>
+  } @if (globalService.openLightBox) {
+  <app-light-box
+    @summon
+    class="fixed top-0 right-0 left-0 bottom-0 bg-neutral-black/75 z-[150] flex justify-center items-center"
+  ></app-light-box>
+  } @if (globalService.openNavbar) {
+  <app-mobile-navbar
+    @summon
+    class="fixed top-0 right-0 left-0 bottom-0 bg-neutral-black/75 z-[150]"
+  ></app-mobile-navbar>
+  }
+  <header class="fixed top-0 left-0 right-0 z-[50]">
+    <app-navbar
+      class="w-full flex justify-center items-center mobile:px-[30px]"
+    ></app-navbar>
+  </header>
+  <section class="pt-[70px] mobile:pt-[100px]">
+    <app-main-app
+      class="w-full flex justify-center items-center mobile:px-[30px]"
+    ></app-main-app>
+  </section>
+</main>

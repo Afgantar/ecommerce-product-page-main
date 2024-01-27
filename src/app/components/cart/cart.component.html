@@ -1,0 +1,58 @@
+<section class="bg-white w-auto mobile:w-[350px]">
+  <section
+    class="px-[25px] py-[25px] border-b-[1px] border-b-neutral-grayish_blue"
+  >
+    <h1 class="font-bold">Cart</h1>
+  </section>
+  <section
+    class="px-[25px] flex flex-col justify-center items-center py-[25px] gap-[20px] min-h-[165px] relative"
+  >
+    @if (globalService.addedItems.length === 0) {
+    <p @summon class="font-bold text-neutral-dark_grayish_blue absolute">
+      Your cart is empty
+    </p>
+    } @else { @for (item of globalService.addedItems; track item.title) {
+    <section @summon class="flex justify-between items-center w-full">
+      <img
+        [src]="item.image"
+        alt=""
+        class="w-[37px] aspect-square rounded-[10px]"
+      />
+      <article>
+        <h1>{{ item.title }}</h1>
+        <p>
+          ${{ item.price }} x {{ item.quantity }}
+          <strong>$ {{ item.totalPrice }}</strong>
+        </p>
+      </article>
+      <button (click)="globalService.removeItem(item)" class="group active:scale-90">
+        <svg
+          width="14"
+          height="16"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <defs>
+            <path
+              d="M0 2.625V1.75C0 1.334.334 1 .75 1h3.5l.294-.584A.741.741 0 0 1 5.213 0h3.571a.75.75 0 0 1 .672.416L9.75 1h3.5c.416 0 .75.334.75.75v.875a.376.376 0 0 1-.375.375H.375A.376.376 0 0 1 0 2.625Zm13 1.75V14.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 14.5V4.375C1 4.169 1.169 4 1.375 4h11.25c.206 0 .375.169.375.375ZM4.5 6.5c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Z"
+              id="a"
+            />
+          </defs>
+          <use
+            fill-rule="nonzero"
+            xlink:href="#a"
+            class="fill-[#C3CAD9] group-hover:fill-black transition-all ease-in-out duration-300"
+          />
+        </svg>
+      </button>
+    </section>
+    }
+    <button
+      @summon
+      class="bg-primary-orange w-full font-bold text-white hover:bg-primary-hover_orange transition-colors ease-in-out duration-300 leading-none py-[15px] rounded-[10px]"
+    >
+      Checkout
+    </button>
+    }
+  </section>
+</section>
